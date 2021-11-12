@@ -1,59 +1,54 @@
-//
-// Created by Alexandre on 12.11.2021.
-//
+/*
+  ---------------------------------------------------------------------------
+  Fichier     : fonction.cpp
 
+  Auteur(s)   : Alexandre Delétraz et Tomas Pavoni
+  Date        : 12.11.2021
+  But         :
 
-unsigned long int getInt() {
+  Remarque(s) : à compléter
 
+  Compilateur : gcc version 8.2.0
+  ---------------------------------------------------------------------------
+*/
 
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <limits>
+
+unsigned long int getInt() {
 
    using namespace std;
-
-
-   int main () {
-
       // ------------------------------------------
       // saisie une valeur entre MIN et MAX
       // ------------------------------------------
-      const string MSG_ERREUR = "/!\\ erreur de saisie ..."s;
-      const int    MIN        = -5,
-         MAX        =  8;
-      int          saisie;    // ne peuvent pas être déclarés
-      bool         erreur;    // ... dans la boucle
+      const               string MSG_ERROR = "/!\\ erreur de saisie ..."s;
+      const unsigned long MIN = 0,
+                          MAX = ULONG_MAX;
+      unsigned  long      value;
+      bool                error;
 
       do {
          // message et saisie
          cout << "saisie [" << MIN << " - " << MAX << "] : ";
-         cin >> saisie;
+         cin >> value;
 
          // saisie et vérification en même temps
          // erreur = not(cin >> saisie) or saisie < MIN or saisie > MAX;
 
          // vérification
-         erreur = cin.fail() or saisie < MIN or saisie > MAX;
-         if (erreur) {
-            cout << MSG_ERREUR << endl;
+         error = cin.fail() or value < MIN;
+         if (error) {
+            cout << MSG_ERROR << endl;
             cin.clear();
          }
-
          // vider buffer
          cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-      } while(erreur);
+      } while(error);
 
-
-      cout << "votre saisie : " << saisie << endl;
-
-      // ---------------------------------------------
-      // fin de programme
-      // ---------------------------------------------
-      cout << endl << endl;
-      cout << "presser ENTER pour quitter";
-      cin.ignore(numeric_limits<streamsize>::max(), '\n'); // vider le buffer
-      return EXIT_SUCCESS;
+      return value;
    }
 
-}
+
