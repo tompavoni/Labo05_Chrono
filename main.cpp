@@ -52,5 +52,7 @@ int main() {
    // Fin du programme
    cout << "\npresser ENTER pour quitter";
    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // vider le buffer
+
+   test salut c'est un test;
    return EXIT_SUCCESS;
 }
