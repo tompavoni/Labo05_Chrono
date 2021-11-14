@@ -37,7 +37,7 @@ int main() {
         << "le temps total et le temps moyen par caractère vous seront "    << endl
         << "affichés. Pour finir vous aurez la possibilité de recommenecer "<< endl
         << "ou non." << endl;
-
+hjhjhj
    //------------------------------------------------------------
    // Boucle pour recommencer la partie
    bool doAgain = 0;
