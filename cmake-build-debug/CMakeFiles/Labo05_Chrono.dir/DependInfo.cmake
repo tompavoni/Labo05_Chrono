@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "C:/Users/tomas/CLionProjects/Labo05_Chrono/fonction.cpp" "C:/Users/tomas/CLionProjects/Labo05_Chrono/cmake-build-debug/CMakeFiles/Labo05_Chrono.dir/fonction.cpp.obj"
   "C:/Users/tomas/CLionProjects/Labo05_Chrono/main.cpp" "C:/Users/tomas/CLionProjects/Labo05_Chrono/cmake-build-debug/CMakeFiles/Labo05_Chrono.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

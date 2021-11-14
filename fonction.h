@@ -19,7 +19,7 @@ const           string MSG_ERROR = "/!\\ erreur de saisie ..."s;
 // return      valeur saisie dans la fonction
 // exception   n/a
 //***********************************************************************************
-long int getInt(const long MIN, const long MAX);
+unsigned int getInt(const unsigned MIN, const unsigned MAX);
 
 //***********************************************************************************
 // nom         charGenerator

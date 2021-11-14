@@ -128,6 +128,30 @@ Labo05_Chrono/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Labo05_Chrono.dir\build.make CMakeFiles/Labo05_Chrono.dir/build
 .PHONY : Labo05_Chrono/fast
 
+fonction.obj: fonction.cpp.obj
+.PHONY : fonction.obj
+
+# target to build an object file
+fonction.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Labo05_Chrono.dir\build.make CMakeFiles/Labo05_Chrono.dir/fonction.cpp.obj
+.PHONY : fonction.cpp.obj
+
+fonction.i: fonction.cpp.i
+.PHONY : fonction.i
+
+# target to preprocess a source file
+fonction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Labo05_Chrono.dir\build.make CMakeFiles/Labo05_Chrono.dir/fonction.cpp.i
+.PHONY : fonction.cpp.i
+
+fonction.s: fonction.cpp.s
+.PHONY : fonction.s
+
+# target to generate assembly for a file
+fonction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Labo05_Chrono.dir\build.make CMakeFiles/Labo05_Chrono.dir/fonction.cpp.s
+.PHONY : fonction.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -161,6 +185,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Labo05_Chrono
+	@echo ... fonction.obj
+	@echo ... fonction.i
+	@echo ... fonction.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

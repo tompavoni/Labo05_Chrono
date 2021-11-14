@@ -1,13 +1,10 @@
 /*
   ---------------------------------------------------------------------------
   Fichier     : fonction.cpp
-
   Auteur(s)   : Alexandre Delétraz et Tomas Pavoni
   Date        : 12.11.2021
   But         : Avoir une librairie de fonction.
-
   Remarque(s) : à compléter
-
   Compilateur : gcc version 8.2.0
   ---------------------------------------------------------------------------
 */
@@ -19,36 +16,33 @@
 #include <ctime>
 #include "fonction.h"
 
-long int getInt(const long MIN, const long MAX) {
+unsigned int getInt(const unsigned MIN, const unsigned MAX) {
 
-      // ------------------------------------------
-      //    saisie une valeur entre MIN et MAX
-      // ------------------------------------------
-      long value;
-      bool error;
+   // ------------------------------------------
+   //    saisie une valeur entre MIN et MAX
+   // ------------------------------------------
+   unsigned value;
+   bool error;
 
-      do {
-         // message et saisie
-         cout << "Veuillez entrer une valeur entre [" << MIN << " et "
-              << MAX << "] : ";
-         cin  >> value;
+   do {
+      // message et saisie
+      cout << "Veuillez entrer une valeur entre [" << MIN << " et "
+           << MAX << "] : ";
+      cin  >> value;
 
-         // saisie et vérification en même temps
-         // erreur = not(cin >> saisie) or saisie < MIN or saisie > MAX;
+      // vérification
+      error = cin.fail() or value < MIN or value > MAX;
+      if (error) {
+         cout << MSG_ERROR << endl;
+         cin.clear();
+      }
+      // vider buffer
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-         // vérification
-         error = cin.fail() or value < MIN;
-         if (error) {
-            cout << MSG_ERROR << endl;
-            cin.clear();
-         }
-         // vider buffer
-         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+   } while(error);
 
-      } while(error);
-
-      return value;
-   }
+   return value;
+}
 
 char charGenerator(int rand1_26){
    char c = char('a' + rand1_26);

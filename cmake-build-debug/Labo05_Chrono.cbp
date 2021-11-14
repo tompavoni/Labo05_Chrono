@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/tomas/CLionProjects/Labo05_Chrono/fonction.cpp">
+			<Option target="Labo05_Chrono"/>
+		</Unit>
 		<Unit filename="C:/Users/tomas/CLionProjects/Labo05_Chrono/fonction.h">
 			<Option target="Labo05_Chrono"/>
 		</Unit>

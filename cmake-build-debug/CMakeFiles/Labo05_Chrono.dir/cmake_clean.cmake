@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Labo05_Chrono.dir/fonction.cpp.obj"
   "CMakeFiles/Labo05_Chrono.dir/main.cpp.obj"
   "Labo05_Chrono.exe"
   "Labo05_Chrono.exe.manifest"
