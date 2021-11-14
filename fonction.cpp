@@ -19,9 +19,8 @@
 #include <ctime>
 #include "fonction.h"
 
-long int getInt(const long MIN, const long MAX, const string& USAGE_MSG,
-                const string& CONJUNCTION_MSG, const string& END_OF_MSG,
-                const string& ERROR_MSG) {
+int getInt(const int MIN, const int MAX, const string& USAGE_MSG,
+           const string& CONJUNCTION_MSG, const string& ERROR_MSG) {
 
    // ------------------------------------------
    //    saisie une valeur entre MIN et MAX
@@ -32,7 +31,7 @@ long int getInt(const long MIN, const long MAX, const string& USAGE_MSG,
    do {
       // message et saisie
       cout << USAGE_MSG << MIN << CONJUNCTION_MSG
-           << MAX << END_OF_MSG;
+           << MAX << " : ";
       cin  >> value;
 
       // vérification
@@ -49,13 +48,6 @@ long int getInt(const long MIN, const long MAX, const string& USAGE_MSG,
    return value;
 }
 
-char charGenerator(int rand1_26){
-   char c = char('a' + rand1_26);
-
-   return c;
-
-}
-
 int intGenerator1_26(){
 
    static bool first = true;
@@ -68,9 +60,15 @@ int intGenerator1_26(){
    return rand1_26;
 }
 
-char getC(const char MIN_CHAR, const char MAX_CHAR, const string& USAGE_MSG,
-          const string& CONJUNCTION_MSG, const string& END_OF_MSG,
-          const string& ERROR_MSG){
+char charGenerator(int rand1_26){
+   char c = char('a' + rand1_26);
+
+   return c;
+
+}
+
+
+char getC(const char MIN_CHAR, const char MAX_CHAR){
 
    // --------------------------------------------------
    // saisie une valeur entre MIN_CHAR et MAX_CHAR
@@ -80,14 +78,13 @@ char getC(const char MIN_CHAR, const char MAX_CHAR, const string& USAGE_MSG,
    bool error;
 
    do {
-      // message et saisie
-      cout << USAGE_MSG << CONJUNCTION_MSG << END_OF_MSG << endl;
+      // saisie
       cin >> userChar;
 
       // vérification
       error = cin.fail() or userChar < MIN_CHAR or userChar > MAX_CHAR;
       if (error) {
-         cout << ERROR_MSG << endl;
+
          cin.clear();
       }
       // vider buffer
@@ -102,11 +99,14 @@ bool tryAgain(const string& USAGE_MSG, const string& CONJUNCTION_MSG,
               const string& END_OF_MSG, const string& ERROR_MSG){
    char userChar;
    bool error;
+   bool output;
 
    do {
       // message et saisie
       cout << USAGE_MSG << CONJUNCTION_MSG << END_OF_MSG << endl;
-      cin >> userChar;
+      cin  >> userChar;
+      userChar = (char)tolower(userChar);
+
 
       // vérification
       error = cin.fail() or userChar !='n' or userChar != 'o';
@@ -114,12 +114,14 @@ bool tryAgain(const string& USAGE_MSG, const string& CONJUNCTION_MSG,
          cout << ERROR_MSG << endl;
          cin.clear();
       }
+      output = userChar == 'n' ? 0 : userChar == 'o' ? 1 : 0;
+
       // vider buffer
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
    } while(error);
 
-   return userChar;
+   return output;
 }
 
 //***********************************************************************************
@@ -129,7 +131,7 @@ bool tryAgain(const string& USAGE_MSG, const string& CONJUNCTION_MSG,
 // return      Un entier
 // exception   n/a
 //***********************************************************************************
-float timeElapse(){
+double timeElapse(){
    clock_t start = 0;
    clock_t end;
    static int startOrEnd = 1;
@@ -143,6 +145,7 @@ float timeElapse(){
       end = clock();
       float realTime = (float)(end - start) / CLOCKS_PER_SEC;
       userTime = realTime;
+      ++startOrEnd;
    }
 
    return userTime;

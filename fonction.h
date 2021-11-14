@@ -20,9 +20,19 @@ using namespace std;
 // return      valeur saisie dans la fonction
 // exception   n/a
 //***********************************************************************************
-long int getInt(const long MIN, const long MAX, const string& USAGE_MSG = "",
-                const string& CONJUNCTION_MSG = "", const string& END_OF_MSG = "",
-                const string& ERROR_MSG = "");
+int getInt(const int MIN, const int MAX, const string& USAGE_MSG = "",
+           const string& CONJUNCTION_MSG = "", const string& ERROR_MSG = "");
+
+
+//***********************************************************************************
+// nom         intGenerator
+// but         Fonction qui génère un entier aléatoire.
+// param       Aucun
+// return      Un entier
+// exception   n/a
+//***********************************************************************************
+int intGenerator1_26();
+
 
 //***********************************************************************************
 // nom         charGenerator
@@ -34,14 +44,6 @@ long int getInt(const long MIN, const long MAX, const string& USAGE_MSG = "",
 //***********************************************************************************
 char charGenerator(int rand1_26);
 
-//***********************************************************************************
-// nom         intGenerator
-// but         Fonction qui génère un entier aléatoire.
-// param       Aucun
-// return      Un entier
-// exception   n/a
-//***********************************************************************************
-int intGenerator1_26();
 
 //***********************************************************************************
 // nom         getC
@@ -51,9 +53,7 @@ int intGenerator1_26();
 // return      Un char
 // exception   n/a
 //***********************************************************************************
-char getC(const char MIN_CHAR, const char MAX_CHAR,  const string& USAGE_MSG = "",
-          const string& CONJUNCTION_MSG = "", const string& END_OF_MSG = "",
-          const string& ERROR_MSG = "");
+char getC(const char MIN_CHAR, const char MAX_CHAR);
 
 
 //***********************************************************************************
@@ -66,6 +66,7 @@ char getC(const char MIN_CHAR, const char MAX_CHAR,  const string& USAGE_MSG = "
 bool tryAgain(const string& USAGE_MSG = "", const string& CONJUNCTION_MSG = "",
               const string& END_OF_MSG = "", const string& ERROR_MSG = "");
 
+
 //***********************************************************************************
 // nom         timeElapse
 // but         Fonction qui permet compter le temps passé.
@@ -73,6 +74,6 @@ bool tryAgain(const string& USAGE_MSG = "", const string& CONJUNCTION_MSG = "",
 // return      Un entier
 // exception   n/a
 //***********************************************************************************
-float timeElapse();
+double timeElapse();
 
 #endif //LABO05_CHRONO_FONCTION_H
