@@ -4,7 +4,8 @@
 
   Auteur(s)   : Alexandre Delétraz et Tomas Pavoni
   Date        : 12.11.2021
-  But         : Avoir une librairie de fonction.
+  But         : Créer une librairie de fonctions utiles à réaliser un testeur de
+                dactylographie.
 
   Remarque(s) : à compléter
 
@@ -19,23 +20,20 @@
 #include <ctime>
 #include "fonction.h"
 
-int getInt(const int MIN, const int MAX, const string& USAGE_MSG,
-           const string& CONJUNCTION_MSG, const string& ERROR_MSG) {
 
-   // ------------------------------------------
-   //    saisie une valeur entre MIN et MAX
-   // ------------------------------------------
-   long value;
+int getIntAndVerify(const int MIN, const int MAX, const string& USAGE_MSG,
+                    const string& ERROR_MSG) {
+
+   int value;
    bool error;
 
    do {
       // message et saisie
-      cout << USAGE_MSG << MIN << CONJUNCTION_MSG
-           << MAX << " : ";
+      cout << USAGE_MSG << "[" << MIN << "-" << MAX << "] : ";
       cin  >> value;
 
       // vérification
-      error = cin.fail() or value < MIN;
+      error = cin.fail() or value < MIN or value > MAX;
       if (error) {
          cout << ERROR_MSG << endl;
          cin.clear();
@@ -48,31 +46,24 @@ int getInt(const int MIN, const int MAX, const string& USAGE_MSG,
    return value;
 }
 
-int intGenerator1_26(){
+
+char letterGenerator(){
+
+   const int NBR_LETTER = 26;                // Nombre de lettre dans l'alphabet
 
    static bool first = true;
    if (first) {
       srand((unsigned)time(NULL));
       first = false;
    }
-   int rand1_26 = rand() % 26;              // valeur [1-26]
-
-   return rand1_26;
-}
-
-char charGenerator(int rand1_26){
-   char c = char('a' + rand1_26);
+   int rand0_25 = rand() % NBR_LETTER;       // valeur [0-25]
+   char c       = char('a' + rand0_25);
 
    return c;
-
 }
 
 
-char getC(const char MIN_CHAR, const char MAX_CHAR){
-
-   // --------------------------------------------------
-   // saisie une valeur entre MIN_CHAR et MAX_CHAR
-   // --------------------------------------------------
+char getC(){
 
    char userChar;
    bool error;
@@ -82,9 +73,8 @@ char getC(const char MIN_CHAR, const char MAX_CHAR){
       cin >> userChar;
 
       // vérification
-      error = cin.fail() or userChar < MIN_CHAR or userChar > MAX_CHAR;
+      error = cin.fail();
       if (error) {
-
          cin.clear();
       }
       // vider buffer
@@ -95,58 +85,38 @@ char getC(const char MIN_CHAR, const char MAX_CHAR){
    return userChar;
 }
 
-bool tryAgain(const string& USAGE_MSG, const string& CONJUNCTION_MSG,
-              const string& END_OF_MSG, const string& ERROR_MSG){
-   char userChar;
-   bool error;
-   bool output;
 
+bool tryAgain(const string USAGE_MSG, const string& ERROR_MSG){
+
+   char userChar;
+   bool output;
+   bool error = false;
    do {
-      // message et saisie
-      cout << USAGE_MSG << CONJUNCTION_MSG << END_OF_MSG << endl;
+      // saisie
+      cout << endl << USAGE_MSG;
       cin  >> userChar;
       userChar = (char)tolower(userChar);
 
-
       // vérification
-      error = cin.fail() or userChar !='n' or userChar != 'o';
+      error = cin.fail();
       if (error) {
          cout << ERROR_MSG << endl;
          cin.clear();
       }
-      output = userChar == 'n' ? 0 : userChar == 'o' ? 1 : 0;
-
+      else if (userChar == 'n'){
+         output = false;
+      }
+      else if (userChar == 'o'){
+         output = true;
+      }
+      else{
+         cout << ERROR_MSG << endl;
+         error = true;
+      }
       // vider buffer
       cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
    } while(error);
 
    return output;
-}
-
-//***********************************************************************************
-// nom         timeElapse
-// but         Fonction qui permet compter le temps passé.
-// param       Aucun
-// return      Un entier
-// exception   n/a
-//***********************************************************************************
-double timeElapse(){
-   clock_t start = 0;
-   clock_t end;
-   static int startOrEnd = 1;
-   float userTime = 0;
-
-   if (startOrEnd % 2 != 0) {
-      start = clock();
-      ++startOrEnd;
-   }
-   else {
-      end = clock();
-      float realTime = (float)(end - start) / CLOCKS_PER_SEC;
-      userTime = realTime;
-      ++startOrEnd;
-   }
-
-   return userTime;
 }

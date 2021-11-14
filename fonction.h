@@ -1,6 +1,17 @@
-//
-// Created by tomas on 10.11.2021.
-//
+/*
+  ---------------------------------------------------------------------------
+  Fichier     : fonction.h
+
+  Auteur(s)   : Alexandre Delétraz et Tomas Pavoni
+  Date        : 12.11.2021
+  But         : Déclarer les fonctions utilisées dans le fichier "fonction.cpp"
+
+  Remarque(s) : à compléter
+
+  Compilateur : gcc version 8.2.0
+  ---------------------------------------------------------------------------
+*/
+
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -10,70 +21,55 @@
 
 using namespace std;
 
-
 //***********************************************************************************
-// nom         getInt
-// but         fonction de saisie d'un entier (long int) non signé pour contrôlé
-//             la saisie.
-// param       Reçoit en paramètre les valeur MAX et MIN ainsi que des string pour
-//             l'utilisateur.
-// return      valeur saisie dans la fonction
+// nom         getIntAndVerify
+// but         - Saisir un entier
+//             - Vérifier s'il est compris entre MIN et MAX
+//
+// param       - MIN       : borne inférieure
+//             - MAX       : borne supérieure
+//             - USAGE_MSG : message de saise
+//             - ERROR_MSG : message d'erreur
+//
+// return      - L'entier saisi
 // exception   n/a
 //***********************************************************************************
-int getInt(const int MIN, const int MAX, const string& USAGE_MSG = "",
-           const string& CONJUNCTION_MSG = "", const string& ERROR_MSG = "");
-
+int getIntAndVerify(const int MIN, const int MAX, const string& USAGE_MSG = "",
+                    const string& ERROR_MSG = "");
 
 //***********************************************************************************
-// nom         intGenerator
-// but         Fonction qui génère un entier aléatoire.
-// param       Aucun
-// return      Un entier
+// nom         letterGenerator
+// but         - Générer une lettre aléatoire
+//
+// param       - Aucun
+//
+// return      - Une lettre aléatoire
 // exception   n/a
 //***********************************************************************************
-int intGenerator1_26();
-
-
-//***********************************************************************************
-// nom         charGenerator
-// but         Fonction qui génère un caractère aléatoire.
-// param       Une valeur numérique générée aléatoirement par la fonction
-//             intGenerator.
-// return      Un caractère
-// exception   n/a
-//***********************************************************************************
-char charGenerator(int rand1_26);
-
+char letterGenerator();
 
 //***********************************************************************************
 // nom         getC
-// but         Fonction de saisie de caratère qui contrôle la saisie.
-// param       Reçoit les valeur de MIN_CHAR et MAX_CHAR et des string pour
-//             l'utilisateur.
-// return      Un char
+// but         - Saisir un caractère
+//
+// param       - Aucun
+//
+// return      - Le caractère saisi
 // exception   n/a
 //***********************************************************************************
-char getC(const char MIN_CHAR, const char MAX_CHAR);
-
+char getC();
 
 //***********************************************************************************
 // nom         tryAgain
-// but         Fonction qui permet de retourner un booléen.
-// param       Des string qui serviront de message pour l'utilisateur
-// return      Un booléen
+// but         - Demander si l'utilisateur souhaite recommencer
+//
+// param       - USAGE_MSG : message de saisie
+//             - ERROR_MSG : message d'erreur
+//
+// return      - Un booléen : 1 pour recommencer et 0 pour arrêter
 // exception   n/a
 //***********************************************************************************
-bool tryAgain(const string& USAGE_MSG = "", const string& CONJUNCTION_MSG = "",
-              const string& END_OF_MSG = "", const string& ERROR_MSG = "");
+bool tryAgain(const string USAGE_MSG = "", const string& ERROR_MSG = "");
 
-
-//***********************************************************************************
-// nom         timeElapse
-// but         Fonction qui permet compter le temps passé.
-// param       Aucun
-// return      Un entier
-// exception   n/a
-//***********************************************************************************
-double timeElapse();
 
 #endif //LABO05_CHRONO_FONCTION_H

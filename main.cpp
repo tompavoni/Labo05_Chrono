@@ -27,23 +27,24 @@ using namespace std;
 
 int main() {
 
-   const string INT_MSG         = "veuillez enter une valeur entre "s;
-   const string CONJUNCTION_MSG = " et "s;
-   //const string CHAR_MSG        = " votre lettre "s;
-   const string MSG_ERROR       = "/!\\ erreur de saisie"s;
-   const string TRY_AGAIN_MSG   = "Voulez-vous recommencer ?"s;
-   const char MIN_CHAR          = 'a';
-   const char MAX_CHAR          = 'z';
+   const string ERROR_MSG       = "/!\\ erreur de saisie"s;
+   const string TRY_AGAIN_MSG   = "Voulez-vous recommencer [o/n] : "s;
+   const string RESULT_MSG      = "Nombre de réponses correctes : "s;
+   const string GET_MSG         = "veuillez enter une valeur entre "s;
+   const string LETTER          = "Lettre : "s;
+   const string TIME_SPENT      = "Temps ecoule : "s;
+   const string UNIT_OF_TIME    = " sec"s;
+   const string RATIO           = " sec par lettre"s;
    const int MIN                = 0;
    const int MAX                = 9999;
 
 
-   // Début du programme
+   //Message de début
    cout << "Ce programme vous permet de tester votre dactylographie. Pour"  << endl
         << "ceci vous devrez tout d'abord saisir le nombre de caracteres"   << endl
         << "que vous voulez afficher. Ensuite une lettre sera generee"      << endl
         << "aleatoirement et vous devrez la copier le plus vite possible."  << endl
-        << "Lorsque vous avez atteint la quantite de caratères definie,"    << endl
+        << "Lorsque vous avez atteint la quantite de carateres definie,"    << endl
         << "le temps total et le temps moyen par caractere vous seront"     << endl
         << "affiches. Pour finir vous aurez la possibilite de recommenecer" << endl
         << "ou non."                                                        << endl;
@@ -52,22 +53,21 @@ int main() {
    bool doAgain;
    do {
       // Saisie du nombre de caractères à afficher
-      unsigned nbrChar = unsigned(getInt(MIN, MAX, INT_MSG , CONJUNCTION_MSG,
-                                         MSG_ERROR));
+      unsigned nbrChar = unsigned(getIntAndVerify(MIN, MAX, GET_MSG, ERROR_MSG));
 
       // Démarrage du chrono
-      time_t startChrono = time(NULL); // timeElapse();
+      time_t startChrono = time(NULL);
 
       // Affichage et comparaison des caractères
       unsigned countCorrect = 0;
       for (unsigned i = 1; i <= nbrChar; i++) {
 
          // Affichage du caractère généré aléatoirement
-         char charGenerated = charGenerator(intGenerator1_26());
-         cout << "Lettre : " << charGenerated << " : ";
+         char charGenerated = letterGenerator();
+         cout << LETTER << charGenerated << " : ";
 
          // Saisie du caractère entré par l'utilisateur
-         char charIn = getC(MIN_CHAR, MAX_CHAR);
+         char charIn = getC();
 
          // Comparaison
          bool isCorrect = (charGenerated == charIn);
@@ -75,26 +75,25 @@ int main() {
       }
 
       // Arrêt du chrono
-      time_t endChrono = time(NULL); // double time = timeElapse();
+      time_t endChrono = time(NULL);
 
       // Affichage réponses correcetes
-      cout << endl << "Nombre de réponses correctes : " << countCorrect << endl;
+      cout << endl << RESULT_MSG << countCorrect << endl;
 
       // Calculs et Affichage des temps
       time_t totalTime = endChrono - startChrono;
-      cout << "Temps écoulé : " << totalTime << " sec " << endl;
-      double averageTime = double(totalTime) / nbrChar;
-      cout << "==> " << averageTime << " sec par lettre" << endl;
+      cout << TIME_SPENT << totalTime << UNIT_OF_TIME << endl;
 
+      double averageTime = double(totalTime) / nbrChar;
+      cout << "==> " << averageTime << RATIO << endl;
 
       // Recommencer ?
-      cout << endl << "Voulez-vous recommencer [o/n] : ";
-      doAgain = tryAgain(TRY_AGAIN_MSG, "",
-                         "" , MSG_ERROR);
+      doAgain = tryAgain(TRY_AGAIN_MSG, ERROR_MSG);
+
    } while(doAgain);
 
    // Fin du programme
-   cout << "\npresser ENTER pour quitter";
+   cout << endl << "Pressez ENTER pour quitter";
    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // vider le buffer
    return EXIT_SUCCESS;
 }
