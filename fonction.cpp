@@ -1,10 +1,13 @@
 /*
   ---------------------------------------------------------------------------
   Fichier     : fonction.cpp
+
   Auteur(s)   : Alexandre Delétraz et Tomas Pavoni
   Date        : 12.11.2021
   But         : Avoir une librairie de fonction.
+
   Remarque(s) : à compléter
+
   Compilateur : gcc version 8.2.0
   ---------------------------------------------------------------------------
 */
@@ -16,24 +19,26 @@
 #include <ctime>
 #include "fonction.h"
 
-unsigned int getInt(const unsigned MIN, const unsigned MAX) {
+long int getInt(const long MIN, const long MAX, const string& USAGE_MSG,
+                const string& CONJUNCTION_MSG, const string& END_OF_MSG,
+                const string& ERROR_MSG) {
 
    // ------------------------------------------
    //    saisie une valeur entre MIN et MAX
    // ------------------------------------------
-   unsigned value;
+   long value;
    bool error;
 
    do {
       // message et saisie
-      cout << "Veuillez entrer une valeur entre [" << MIN << " et "
-           << MAX << "] : ";
+      cout << USAGE_MSG << MIN << CONJUNCTION_MSG
+           << MAX << END_OF_MSG;
       cin  >> value;
 
       // vérification
-      error = cin.fail() or value < MIN or value > MAX;
+      error = cin.fail() or value < MIN;
       if (error) {
-         cout << MSG_ERROR << endl;
+         cout << ERROR_MSG << endl;
          cin.clear();
       }
       // vider buffer
@@ -63,23 +68,26 @@ int intGenerator1_26(){
    return rand1_26;
 }
 
-char getC(const char MIN_CHAR, const char MAX_CHAR){
+char getC(const char MIN_CHAR, const char MAX_CHAR, const string& USAGE_MSG,
+          const string& CONJUNCTION_MSG, const string& END_OF_MSG,
+          const string& ERROR_MSG){
 
    // --------------------------------------------------
    // saisie une valeur entre MIN_CHAR et MAX_CHAR
    // --------------------------------------------------
 
-   char userChar = 0;
+   char userChar;
    bool error;
 
    do {
       // message et saisie
-      cout << "Saisisez le caractère" << endl;
+      cout << USAGE_MSG << CONJUNCTION_MSG << END_OF_MSG << endl;
+      cin >> userChar;
 
       // vérification
       error = cin.fail() or userChar < MIN_CHAR or userChar > MAX_CHAR;
       if (error) {
-         cout << MSG_ERROR << endl;
+         cout << ERROR_MSG << endl;
          cin.clear();
       }
       // vider buffer
@@ -90,18 +98,20 @@ char getC(const char MIN_CHAR, const char MAX_CHAR){
    return userChar;
 }
 
-bool tryAgain(){
+bool tryAgain(const string& USAGE_MSG, const string& CONJUNCTION_MSG,
+              const string& END_OF_MSG, const string& ERROR_MSG){
    char userChar;
    bool error;
 
    do {
       // message et saisie
+      cout << USAGE_MSG << CONJUNCTION_MSG << END_OF_MSG << endl;
       cin >> userChar;
 
       // vérification
       error = cin.fail() or userChar !='n' or userChar != 'o';
       if (error) {
-         cout << MSG_ERROR << endl;
+         cout << ERROR_MSG << endl;
          cin.clear();
       }
       // vider buffer
@@ -110,4 +120,30 @@ bool tryAgain(){
    } while(error);
 
    return userChar;
+}
+
+//***********************************************************************************
+// nom         timeElapse
+// but         Fonction qui permet compter le temps passé.
+// param       Aucun
+// return      Un entier
+// exception   n/a
+//***********************************************************************************
+float timeElapse(){
+   clock_t start = 0;
+   clock_t end;
+   static int startOrEnd = 1;
+   float userTime = 0;
+
+   if (startOrEnd % 2 != 0) {
+      start = clock();
+      ++startOrEnd;
+   }
+   else {
+      end = clock();
+      float realTime = (float)(end - start) / CLOCKS_PER_SEC;
+      userTime = realTime;
+   }
+
+   return userTime;
 }

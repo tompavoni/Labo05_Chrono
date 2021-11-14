@@ -9,17 +9,20 @@
 #define LABO05_CHRONO_FONCTION_H
 
 using namespace std;
-const           string MSG_ERROR = "/!\\ erreur de saisie ..."s;
+
 
 //***********************************************************************************
 // nom         getInt
 // but         fonction de saisie d'un entier (long int) non signé pour contrôlé
 //             la saisie.
-// param       Reçoit en paramètre les valeur MAX et MIN.
+// param       Reçoit en paramètre les valeur MAX et MIN ainsi que des string pour
+//             l'utilisateur.
 // return      valeur saisie dans la fonction
 // exception   n/a
 //***********************************************************************************
-unsigned int getInt(const unsigned MIN, const unsigned MAX);
+long int getInt(const long MIN, const long MAX, const string& USAGE_MSG = "",
+                const string& CONJUNCTION_MSG = "", const string& END_OF_MSG = "",
+                const string& ERROR_MSG = "");
 
 //***********************************************************************************
 // nom         charGenerator
@@ -43,20 +46,33 @@ int intGenerator1_26();
 //***********************************************************************************
 // nom         getC
 // but         Fonction de saisie de caratère qui contrôle la saisie.
-// param       Reçoit les valeur de MIN_CHAR et MAX_CHAR
+// param       Reçoit les valeur de MIN_CHAR et MAX_CHAR et des string pour
+//             l'utilisateur.
 // return      Un char
 // exception   n/a
 //***********************************************************************************
-char getC(const char MIN_CHAR, const char MAX_CHAR);
+char getC(const char MIN_CHAR, const char MAX_CHAR,  const string& USAGE_MSG = "",
+          const string& CONJUNCTION_MSG = "", const string& END_OF_MSG = "",
+          const string& ERROR_MSG = "");
 
 
 //***********************************************************************************
 // nom         tryAgain
 // but         Fonction qui permet de retourner un booléen.
-// param       Aucun
+// param       Des string qui serviront de message pour l'utilisateur
 // return      Un booléen
 // exception   n/a
 //***********************************************************************************
-bool tryAgain();
+bool tryAgain(const string& USAGE_MSG = "", const string& CONJUNCTION_MSG = "",
+              const string& END_OF_MSG = "", const string& ERROR_MSG = "");
+
+//***********************************************************************************
+// nom         timeElapse
+// but         Fonction qui permet compter le temps passé.
+// param       Aucun
+// return      Un entier
+// exception   n/a
+//***********************************************************************************
+float timeElapse();
 
 #endif //LABO05_CHRONO_FONCTION_H

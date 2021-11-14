@@ -1,91 +1,77 @@
 /*
 -----------------------------------------------------------------------------------
 Nom du fichier : main.cpp
-Auteur(s)      : Tomas Pavoni et Alexandre Delétraz
-Date creation  : 10.11.2021
-Description    : Ce programme vous permet de tester votre dactylographie. Pour
-                 ceci vous devrez tout d'abord saisir le nombre de caractères que
-                 vous voulez afficher. Ensuite une lettre sera générée
-                 aléatoirement et vous devrez la copier le plus vite possible.
-                 Lorsque vous avez atteint la quantité de caratères définie,
-                 le temps total et le temps moyen par caractère vous seront affichés.
-                 Pour finir vous aurez la possibilité de recommenecer ou non.
-
-Remarque(s)    : - Ce programme affiche uniquement des lettres minuscules [a-z]
-                 - Le chrono démarre une fois le nombre de caractères saisi.
-
-Compilateur    : Mingw-w64 g++ 11.1.0
+Auteur(s) : Tomas Pavoni et Alexandre Delétraz
+Date creation : 10.11.2021
+Description : <à compléter>
+Remarque(s) : <à compléter>
+Compilateur : Mingw-w64 g++ 11.1.0
 -----------------------------------------------------------------------------------
 */
+#include "fonction.h"
 #include <cstdlib>
 #include <iostream>
 #include <limits>
-#include <ctime>
-
-#include "fonction.h"
+#include <string>
 
 using namespace std;
 
 int main() {
 
+   const string INT_MSG         = "veuillez enter une valeur superieur à "s;
+   const string CONJUNCTION_MSG = " et "s;
+   const string END_OF_MSG      = "] : "s;
+   const string MSG_ERROR       = "/!\\ erreur de saisie"s;
+   const string TRY_AGAIN_MSG   = "Voulez-vous recommencer ?"s;
+   const char MIN_CHAR          = 'a';
+   const char MAX_CHAR          = 'z';
+
+
    // Début du programme
-   cout << "Ce programme vous permet de tester votre dactylographie. Pour " << endl
-        << "ceci vous devrez tout d'abord saisir le nombre de caractères "  << endl
-        << "que vous voulez afficher. Ensuite une lettre sera générée "     << endl
-        << "aléatoirement et vous devrez la copier le plus vite possible. " << endl
-        << "Lorsque vous avez atteint la quantité de caratères définie, "   << endl
-        << "le temps total et le temps moyen par caractère vous seront "    << endl
-        << "affichés. Pour finir vous aurez la possibilité de recommenecer "<< endl
-        << "ou non." << endl;
-hjhjhj
-   //------------------------------------------------------------
+   cout << "Bonjour, ce programme est fait pour tester votre dexterite" << endl
+        << "avec un clavier d'ordinateur."                              << endl
+        << "Vous allez avoir le choix du nombre de caracteres que vous" << endl
+        << "aurez a rentrer. A la fin de votre exercice, le programme"  << endl
+        << "vous indiquera le temps total que vous avez mis pour finir" << endl
+        << "l'exercice, ainsi que le temps moyen pour chaque caractere" << endl;
+
    // Boucle pour recommencer la partie
-   bool doAgain = 0;
+   bool doAgain;
    do {
       // Saisie du nombre de caractères à afficher
-      const unsigned MIN   = 0;
-      const unsigned MAX   = 9999;
-      unsigned int nbrChar = getInt(MIN,MAX);
-
+      long int nbrChar = getInt(0, LONG_MAX, INT_MSG ,
+                                "",
+                                "",MSG_ERROR);
       // Démarrage du chrono
-      time_t startChrono = time(NULL);
+      timeElapse();
 
-      // Affichage et comparaison des caractères
-      unsigned countCorrect = 0;
-      for (unsigned i = 1; i <= nbrChar; i++) {
-
+      unsigned long int countCorrect = 0;
+      for (long int i = 1; i <= nbrChar; i++) {
          // Affichage du caractère généré aléatoirement
-         char charGenerated = charGenerator(intGenerator1_26);
-         cout << "Lettre : " << charGenerated << " : ";
-
-         // Saisie du caractère entré par l'utilisateur
-         char charIn = getC();
-
+         char charGenerated = charGenerator(intGenerator1_26());
+         cout << charGenerated;
+         // Saisie d'un char
+         char charIn = getC(MIN_CHAR, MAX_CHAR);
          // Comparaison
-         bool isCorrect = (charGenerated == charIn);
-         countCorrect  += isCorrect;
+         bool isCorrect = charGenerated == charIn;
+         countCorrect += isCorrect;
       }
-
       // Arrêt du chrono
-      time_t endChrono = time(NULL);
 
-      // Affichage réponses correcetes
-      cout << endl << "Nombre de réponses correctes : " << countCorrect << endl;
-
-      // Calculs et Affichage des temps
-      time_t totalTime = endChrono - startChrono;
-      cout << "Temps écoulé : " << totalTime << " sec " << endl;
-      double averageTime = totalTime / nbrChar;
-      cout << "==> " << averageTime << " sec par lettre" << endl;
-
+      // Affichage
+      double time = timeElapse();
+      double averageTime = time / nbrChar;
+      cout << time << averageTime << countCorrect << nbrChar;
       // Recommencer ?
-      cout << endl << "Voulez-vous recommencer [Y/n] : ";
-      doAgain = tryAgain();
+
+      doAgain = tryAgain(TRY_AGAIN_MSG, "",
+                         "" , MSG_ERROR);
    } while(doAgain);
 
-   //------------------------------------------------------------
    // Fin du programme
    cout << "\npresser ENTER pour quitter";
    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // vider le buffer
+
+
    return EXIT_SUCCESS;
 }
